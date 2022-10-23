@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+
+    <title>Controle Financeiro - App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+        integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <!--tables-->
+
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap.min.css" />
+
+    <link rel="stylesheet" href="bootstrap-select.css">
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css">
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand mx-auto" align="center" onclick="graphController.carregaGraph();" style="color:#f1f1f1">JV Finantial</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- <ul class="navbar-nav mr-auto"> -->
+
+                <div class="col-md-12" id="navAlign">
+
+                    <ul class="navbar-nav">
+					
+						<li class="nav-item active">
+							<a id="navGraph" class="nav-link" onclick="viewController(5)">Gráfico</a>
+						</li>
+						<li class="nav-item">
+                            <a id="navDespesas" class="nav-link" onclick="viewController(1)">Rendimentos</a>
+                        </li>
+						<li class="nav-item">
+                            <a id="navDespesas" class="nav-link" onclick="viewController(2)">Despesas</a>
+                        </li>
+						<li class="nav-item">
+                            <a id="navDespesas" class="nav-link" onclick="viewController(3)">Categorias</a>
+                        </li>
+						<li class="nav-item">
+                            <a id="navDespesas" class="nav-link" onclick="viewController(4)">Lista de Desejos</a>
+                        </li>
+                        <!-- <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li> -->
+                        <!-- <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li> -->
+                        <!--<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Cadastros
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" onclick="viewController('5')">Gráfico</a>
+									<a class="dropdown-item" onclick="viewController('1')">Rendimentos</a>
+									<a class="dropdown-item" onclick="viewController('2')">Despesas</a>
+									<a class="dropdown-item" onclick="viewController('3')">Categorias</a>
+									<a class="dropdown-item" onclick="viewController('4')">Lista de desejos</a>
+									<div class="dropdown-divider"></div>
+										<a class="dropdown-item" onclick="carregaSuporte()">Suporte</a>
+								</div>
+							</li>-->
+                        <!-- <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Disabled</a>
+                            </li> -->
+
+                        <!--<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Perfil
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" onclick="carregaPreferencias()">Opções</a>
+                                <a class="dropdown-item" onclick="carregaSuporte()">Suporte</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="logoff()" id="btnLogoff"></a>
+                            </div>
+                        </li>-->
+                    </ul>
+
+                    <form class="form-inline my-2 my-lg-0 float-right" id="divBusca">
+                        <!-- my-2 my-lg-0 float-right-->
+                        <input id="campoBusca" class="form-control float-right empty" type="search"
+                            placeholder="&#xF002; Buscar" aria-label="Search">
+                        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button> -->
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="fixme">
+        <a onclick="graphController.carregaGraph();"><i class="fa fa-arrow-left visible-xs-block visible-sm-block" style="font-size: 18px;"></i></a>
+    </div>
+    <div class="container-fluid" id="mainContent">
+        <!--supreme-container-->
+        <!-- <div class="row">
+                <div class="col-md-12" align="center">
+                    <h3 id="tituloTabela">
+                        Nome da sua empresa AQUI
+                        <small class="text-muted">Início</small>
+                    </h3>
+                </div>
+            </div> -->
+			
+		<div>
+            <div class="row">
+
+                <div class="col-md-2">
+                    <button type="button" class="btn" data-toggle="collapse" data-target="#export-collapse" id="tabExport" style="display: none;">
+						<span class="navbar-light"><i class="fa fa-print"></i></span>
+                    </button>
+					<button class="btn" type="button" onclick="carregaPreferencias()" title="Opções"><span class="navbar-light"><i class="fa fa-cog"></i></span></button>
+					<button disabled ="true" class="btn" type="button" id="btn_reorganizar" onclick="reorganizarMes(true)" title="Reorganizar mudança de mês"><span class="navbar-light"><i class="fa fa-refresh"></i></span></button>
+                </div>
+				<div class="col-md-3">
+					<span id="saldo_tela"></span></b>
+				</div>
+				<div class="col-md-3">
+					<span id="saldo_estimado_tela"></span></b>
+				</div>
+				<div class="col-md-3">
+					<span id="despesa_estimada_tela"></span></b>
+				</div>
+				<div class="col-md-1">
+				</div>
+
+            </div>
+        </div>
+		
+		<div class="row">
+			<div class="col-md-12" class="collapse">
+				
+			</div>
+		</div>
+
+        <div id="export-collapse" class="collapse">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div id="btnTabela" style="text-align: center;"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- <div class="fixme"><i class="fa fa-arrow-left visible-xs-block" style="text-align: left;"></i></div> -->
+
+        <div class="row" style="margin-top: 20px" align="center">
+
+            <div class="col-lg-2 col-md-12 d-none d-lg-block border border-light" id="divFixo">
+
+                <!-- <div class="affix"> -->
+                <div class="sticky-top">
+					<button type="button" class="btn btn-primary full-width"
+                        onclick="viewController(5)">Gráfico</button>
+                    <button type="button" class="btn btn-primary full-width"
+                        onclick="viewController(1)">Rendimentos</button>
+                    <br><button type="button" class="btn btn-primary full-width"
+                        onclick="viewController(2)">Despesas</button>
+					<br><button disabled="true" type="button" class="btn btn-primary full-width"
+                        onclick="viewController(5)">Formas</button>
+                    <br><button type="button" class="btn btn-primary full-width"
+                        onclick="viewController(3)">Categorias</button>
+                    <br><button type="button" class="btn btn-primary full-width"
+                        onclick="viewController(4)">Lista de Desejos</button>
+                </div>
+
+            </div>
+
+            <div class="col-lg-2 col-md-12 order-lg-2 border border-light">
+
+                <div class="sticky-top">
+                    <div class="col-md-12 col-sm-4 height-align-center">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistro"
+                            id="addBtn">Adicionar</button>
+						<button type="button" class="btn d-lg-none" data-toggle="collapse" data-target="#filter-collapse" id="tabFilter">
+							<span class="navbar-light"><i class="fa fa-search"></i></span></button>
+						<button disabled="true" class="btn" type="button">
+							<span class="navbar-light"><i class="fa fa-filter"></i></span></button>
+                    </div>
+
+                    <div id="filter-collapse" class="collapse d-lg-block">
+                        <div class="col-md-12 col-sm-4 align_content_md">
+                            <div id="buscarTabela"></div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-4">
+                            <div id="exibirQtd"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8 col-md-12 order-lg-1 border border-light">
+                <div id="tituloTabela"></div>
+
+                <div class="progress progress-striped active" id="loadingBar">
+                    <div class="progress-bar progress-bar-info" style="width:0%"></div>
+                </div>
+
+                <div class="scrolling-wrapper" id="conteudoJSON"></div>
+                <div id="tabNav"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        <!-- Grid container -->
+        <div class="container pt-4">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fa fa-facebook-f"></i></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fa fa-twitter"></i></a>
+
+                <!-- Google -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fa fa-google"></i></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fa fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fa fa-linkedin"></i></a>
+                <!-- Github -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fa fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 ~ 2022 Copyright:
+            <a class="text-dark" href="https://jhonyvillani.github.io/meu-site/">Jhony Villani</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <!-- Modal -->
+    <div data-toggle="validator" role="form" class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="modalRegistroLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalRegistroLabel">Registros</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--ini-->
+                <div class="modal-body" id="modalWindow">
+
+                    <!--end-->
+                </div>
+                <div class="modal-footer">
+                    <button id="btnFechar" type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button id="btnSalvar" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!--tables-->
+    <script src="datatables/jquery-3.5.1.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <!--<script src="datatables/jquery.dataTables.min.js"></script>-->
+    <script src="datatables/dataTables.buttons.min.js"></script>
+    <script src="datatables/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="datatables/vfs_fonts.js"></script>
+    <script src="datatables/buttons.html5.min.js"></script>
+    <script src="datatables/buttons.print.min.js"></script>
+
+    <script src="datatables/dataTables.bootstrap.min.js"></script>
+    <script src="datatables/dataTables.responsive.min.js"></script>
+    <script src="datatables/responsive.bootstrap.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+	<script src="despesas.js"></script>
+	<script src="rendimentos.js"></script>
+	<script src="wishlist.js"></script>
+	<script src="categorias.js"></script>
+	<script src="graph.js"></script>
+    <script src="main.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+</body>
+
+</html>
